@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= LOADER ================= -->
+<div class="loader" id="loader">
+  <div class="loader-glyph" id="loaderGlyph">❤</div>
+</div>
+
+<!-- ================= SCROLL PROGRESS ================= -->
+<div class="progress-rail" aria-hidden="true">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- ================= FLOATING NAV ================= -->
+<nav class="chapter-nav" id="chapterNav" aria-label="Sections">
+  <button data-target="hero" class="active" aria-label="Opening">✦</button>
+  <button data-target="story" aria-label="Our story">✦</button>
+  <button data-target="reasons" aria-label="Reasons">✦</button>
+  <button data-target="letter" aria-label="Letter">✦</button>
+  <button data-target="questions" aria-label="Questions">✦</button>
+  <button data-target="dreams" aria-label="Future">✦</button>
+  <button data-target="proposal" aria-label="Proposal">✦</button>
+</nav>
+
+<!-- ================= AMBIENT BACKDROP ================= -->
+<div class="ambient" id="ambient" aria-hidden="true"></div>
+
+<!-- ================= MUSIC CONTROL ================= -->
+<button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+  <span class="music-icon">♪</span>
+</button>
+<audio id="bgMusic" loop preload="none">
+  <source src="audio/our-song.mp3" type="audio/mpeg">
+</audio>
+
+<main id="mainContent">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <p class="eyebrow reveal">a small note before anything else</p>
+    <h1 class="hero-title reveal" id="heroTitle">Hey, you.</h1>
+    <p class="hero-sub reveal">I have something important to ask you...</p>
+    <button class="btn-primary open-heart" id="openHeartBtn">
+      <span>Open My Heart</span> <span class="btn-heart">❤</span>
+    </button>
+    <p class="hint reveal">turn your volume up, just a little 🎵</p>
+  </section>
+
+  <div id="revealedContent" class="hidden-until-open">
+
+    <!-- ================= PERSONAL MESSAGE ================= -->
+    <section class="section message-section" id="message">
+      <p class="eyebrow reveal">chapter one</p>
+      <h2 class="reveal serif-lg" id="dearName">Dear Someone,</h2>
+      <p class="typewriter-target reveal" id="personalMessage" data-full="Some people enter our lives quietly, without any warning, and somehow become the part of the story you never want to end. That's what happened when I met you."></p>
+    </section>
+
+    <!-- ================= OUR STORY ================= -->
+    <section class="section" id="story">
+      <p class="eyebrow reveal center">chapter two</p>
+      <h2 class="reveal center serif-lg">Our Little Story</h2>
+      <div class="timeline" id="timeline"><!-- injected by JS --></div>
+    </section>
+
+    <!-- ================= GALLERY ================= -->
+    <section class="section gallery-section" id="gallery">
+      <p class="eyebrow reveal center">chapter three</p>
+      <h2 class="reveal center serif-lg">A Few Favorite Moments</h2>
+      <p class="reveal center muted">replace these with your own photos in /images</p>
+      <div class="gallery-grid" id="galleryGrid"><!-- injected by JS --></div>
+    </section>
+
+    <!-- ================= REASONS ================= -->
+    <section class="section reasons-section" id="reasons">
+      <p class="eyebrow reveal center">chapter four</p>
+      <h2 class="reveal center serif-lg">Reasons I Love You</h2>
+      <div class="reasons-grid" id="reasonsGrid"><!-- injected by JS --></div>
+      <button class="btn-ghost center-btn" id="moreReasonsBtn">Give me another reason</button>
+    </section>
+
+    <!-- ================= LOVE LETTER ================= -->
+    <section class="section letter-section" id="letter">
+      <p class="eyebrow reveal center">chapter five</p>
+      <h2 class="reveal center serif-lg">You Have A Letter</h2>
+      <div class="envelope" id="envelope">
+        <div class="envelope-body">
+          <div class="envelope-flap"></div>
+          <div class="envelope-seal">❤</div>
+        </div>
+        <p class="envelope-hint reveal">tap to open</p>
+      </div>
+      <div class="letter-paper hidden-el" id="letterPaper">
+        <p id="letterText" class="typewriter-target" data-full="If you're reading this, it means you finally opened it — just like you opened up a part of my life I didn't know was waiting to be filled. Thank you for every ordinary afternoon that became a memory, every terrible joke you laughed at anyway, and every quiet moment that felt like home. I don't know what our story still has written for us, but I know I want you on every page of it."></p>
+        <p class="letter-sign">Forever yours,<br><span id="letterFrom">Me</span> ❤</p>
+      </div>
+    </section>
+
+    <!-- ================= QUESTION GAME ================= -->
+    <section class="section question-game" id="questions">
+      <p class="eyebrow reveal center">chapter six · a few important questions</p>
+      <div class="question-card">
+        <div class="question-progress"><span id="qNum">1</span> / <span id="qTotal">5</span></div>
+        <div class="question-emoji" id="qEmoji">❤</div>
+        <h3 id="qText">Do you like me?</h3>
+        <p class="question-reaction" id="qReaction"></p>
+        <div class="answer-buttons">
+          <button class="btn-primary small" id="qYes">Yes ❤</button>
+          <button class="btn-ghost small" id="qNo">No 🙈</button>
+        </div>
+        <button class="btn-text continue-btn" id="qContinue">Continue →</button>
+      </div>
+    </section>
+
+    <!-- ================= FUTURE DREAMS ================= -->
+    <section class="section dreams-section" id="dreams">
+      <p class="eyebrow reveal center">chapter seven</p>
+      <h2 class="reveal center serif-lg">Things I Want To Do With You</h2>
+      <div class="dreams-grid" id="dreamsGrid"><!-- injected by JS --></div>
+    </section>
+
+    <!-- ================= COUNTDOWN (optional) ================= -->
+    <section class="section countdown-section" id="countdown">
+      <p class="eyebrow reveal center">counting down</p>
+      <h2 class="reveal center serif-lg" id="countdownTitle">Our Special Day</h2>
+      <div class="countdown-grid" id="countdownGrid"><!-- injected by JS --></div>
+    </section>
+
+    <!-- ================= PROPOSAL ================= -->
+    <section class="section proposal-section" id="proposal">
+      <div class="proposal-inner">
+        <p class="proposal-pre reveal" id="proposalPre1">Okay. Enough playful questions.</p>
+        <p class="proposal-pre reveal" id="proposalPre2">There's one more — a real one.</p>
+        <div class="countdown-beats" id="countdownBeats"></div>
+        <div class="proposal-heart">❤</div>
+        <h1 class="proposal-question">Will You Be Mine?</h1>
+        <div class="proposal-buttons">
+          <button class="btn-primary large" id="proposalYes">Yes ❤</button>
+          <button class="btn-ghost large" id="proposalNo">No 🙈</button>
+        </div>
+        <p class="proposal-reaction" id="proposalReaction"></p>
+      </div>
+    </section>
+
+    <!-- ================= CELEBRATION ================= -->
+    <section class="section celebration" id="celebration">
+      <div class="celebration-content">
+        <div class="big-heart">❤</div>
+        <h1 class="serif-lg">You just made me the happiest person</h1>
+        <p class="names" id="namesLine">Partner &amp; Me</p>
+        <p class="muted">our story continues...</p>
+        <button class="btn-ghost" id="replayBtn">Replay our story ↺</button>
+      </div>
+    </section>
+
+    <!-- ================= FINAL MESSAGE ================= -->
+    <section class="section final-section" id="final">
+      <p class="reveal center final-line">This isn't the end.</p>
+      <p class="reveal center final-line">It's the beginning of our next chapter.</p>
+      <p class="reveal center final-line small">thank you for being my favorite person</p>
+      <p class="reveal center final-line serif-lg">Forever &amp; always ❤</p>
+
+      <!-- hidden secret heart easter egg -->
+      <button class="secret-heart" id="secretHeart" aria-label="a secret">·</button>
+      <p class="secret-message hidden-el" id="secretMessage">Psst — I loved you before I knew how to say it. ❤</p>
+    </section>
+
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
